@@ -8,8 +8,7 @@ def calculate_rectangle_area(length:float, width:float) -> float:
     return length * width
 
 def main():
-    parser = argparse.ArgumentParser
-    (description = "Calculate the area of a rectangle.")
+    parser = argparse.ArgumentParser(description = "Calculate the area of a rectangle.")
     parser.add_argument("-l","--length", 
                         type=float, default=10.0,
                         help="The length of the rectangle.")
