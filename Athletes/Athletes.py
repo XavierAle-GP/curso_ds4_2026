@@ -7,7 +7,7 @@ class Athlete:
     def __str__(self):
             return f"Athlete name:{self.name}, age:{self.age}"
     def __repr__(self):
-            return f"Athlete('name={self.name}, age={self.age}, 'sport: {self.sport})"
+            return f"Athlete('name={self.name}', age={self.age}, 'sport: {self.sport}')"
     def display(self):
             print(f"|{self.name}|{self.age}|{self.sport}|")
 
