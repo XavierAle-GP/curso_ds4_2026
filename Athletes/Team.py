@@ -1,24 +1,24 @@
 """
 Doc string for Team.py
-Author: Xavier Alejandro Gonzalez Pacheco
+Author: Federico Cirett Galán
 Date: Aug 26,2026
 """
-from Athletes import Athlete
+from Athlete import Athlete
 from Sport import Sport
 class Team:
-    """Team class represents a team in the torunament. It has a name, 
-    a sport and a list of athletes."""
+    """ Team class represents a team in the tournament. It has a name, a sport and a list of athletes."""
     def __init__(self, name:str, sport:Sport):
         "Custom constructor for Team"
         self.name = name
         self.sport = self.set_sport(sport)
-        self.athletes =[]
+        self.athletes = []
     def set_sport(self, sport):
-        """Set tge sport for the team."""
+        """ Set the sport for the team."""
         if isinstance(sport, Sport):
-            return sport
+            return  sport
         else:
             raise ValueError("Only Sport objects")
+        return None
     def add_athlete(self, athlete):
         """ Add an Athlete to the list of athletes"""
         if isinstance(athlete, Athlete):
@@ -26,8 +26,9 @@ class Team:
         else:
             raise ValueError("Only Athlete objects")
     def __str__(self):
-        """String representation of the Team class"""
+        """ String representation of the Team class"""
         return f"{self.name} - {self.sport}: {[x for x in self.athletes]}"
+
 if __name__ == "__main__":
     a = Athlete("Lionel Messi",38,"Soccer")
     b = Athlete("Cristiano Ronaldo",40,"Soccer")
@@ -37,3 +38,4 @@ if __name__ == "__main__":
     stars.add_athlete(a)
     stars.add_athlete(b)
     stars.add_athlete(c)
+    print(stars)

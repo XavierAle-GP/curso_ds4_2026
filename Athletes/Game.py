@@ -1,45 +1,44 @@
 """
-Game class for managing the game logic
-""" 
+Game class for managing the game logic.
+"""
 import random
 from Team import Team
 from Sport import Sport
-from Athletes import Athlete
+from Athlete import Athlete
 
 class Game:
     """
-    Represents a game between two teams in a specific sport. It has
-    two teams and a score
+    Represents a game between two teams in a specific sport. It has two teams and a score 
     """
-    def ___init__(self, A:Team, B:Team):
-        """
-        Custom constructor
-        """
+    def __init__(self, A:Team, B:Team):
+        """ Custom constructor for the Game class."""
         self.team_A = A
         self.team_B = B
-        self.score = {{self.team_A.name: 0, self.team_B.name:0}}
+        self.score = {self.team_A.name: 0,
+                      self.team_B.name: 0}
+        self.winner = None
+        self.loser = None
     def play(self):
-        """ Simulates the game and updates the score based on
-        the performance of the athletes.
-        """
-        a = random.randint(0,100)
-        b = random.randint(0,100)
+        """ Simulates the game and updates the score based on the performance of the athletes."""
+        a = random.randint(0, 100)
+        b = random.randint(0, 100)
         self.score[self.team_A.name] = a
         self.score[self.team_B.name] = b
         if a > b:
             self.winner = self.team_A.name
             self.loser = self.team_B.name
-        if b > a:
+        elif b > a:
             self.winner = self.team_B.name
             self.loser = self.team_A.name
         else:
             self.winner = "Draw"
             self.loser = "Draw"
     def __str__(self):
-          return f"{self.team_A.name:<20}: {self.score[self.team_A.name]}\n{self.team_B.name:<20}: {self.score[self.team_B.name]}"
-          return f"{self.team_A.name:<20}:{self.score[self.team_A.name]:>3} | {self.team_B.name:<20} | {self.score[self.team_B.name]:>3} | Winner: {self.winner}"
-
-
+        """ Returns a string representation of the game, including the teams, score, and winner."""
+        return f"{self.team_A.name:<20}: {self.score[self.team_A.name]}\n{self.team_B.name:<20}: {self.score[self.team_B.name]}"
+    def display(self):
+        """ Displays the game result in a formatted manner."""
+        print(f"|{self.team_A.name:<20} | {self.score[self.team_A.name]:>3} |{self.team_B.name:<20} | {self.score[self.team_B.name]:>3} | Winner: {self.winner}|")
 
 if __name__ == "__main__":
     # Example usage
@@ -49,13 +48,14 @@ if __name__ == "__main__":
     d = Athlete("David", 22, "Soccer")
     e = Athlete("Eve", 27, "Soccer")
     f = Athlete("Frank", 29, "Soccer")
-    team_a = Team("Athletic", Sport("Soccer", 11, "UEFA"))
-    team_b = Team("Barcelona", Sport("Soccer", 11, "UEFA"))
-
-    team.a.add_athlete(a)
-    team.a.add_athlete(b)
-    team.a.add_athlete(c)
-    team.a.add_athlete(d)
-    team.a.add_athlete(e)
-    team.a.add_athlete(f)
-    game = Game{team_a, team_b}
+    team_a = Team("Athletic",Sport("Soccer",11,"UEFA"))
+    team_b = Team("Barcelona",Sport("Soccer",11,"UEFA"))
+    team_a.add_athlete(a)
+    team_a.add_athlete(b)
+    team_b.add_athlete(c)
+    team_b.add_athlete(d)
+    team_b.add_athlete(e)
+    team_b.add_athlete(f)
+    game = Game(team_a, team_b)
+    game.play()
+    game.display()
