@@ -1,4 +1,10 @@
 """ Auxiliary functions for the Hangman game. """
+import os
+
+
+def list_directory_files(directory:str) -> list:
+    """List all files in a given directory."""
+    return [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
 
 def load_book(file_path:str) -> list:
     """Load a book from a text file and return a list of words."""
