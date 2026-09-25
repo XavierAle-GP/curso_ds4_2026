@@ -5,6 +5,7 @@
 
 import argparse
 import csv
+import os
 import re
 from collections import defaultdict
 
@@ -53,6 +54,10 @@ def leer_csv(ruta_archivo):
     return frases
 
 def guardar_csv(ruta_archivo, frases):
+    directorio = os.path.dirname(ruta_archivo)
+    if directorio and not os.path.exists(directorio):
+        os.makedirs(directorio, exist_ok=True)
+
     with open(ruta_archivo, "w", newline="", encoding="utf-8") as archivo:
         escritor = csv.DictWriter(archivo, fieldnames=["frase", "pelicula"])
         escritor.writeheader()
@@ -61,6 +66,24 @@ def guardar_csv(ruta_archivo, frases):
                 "frase": frase.frase,
                 "pelicula": frase.pelicula.nombre,
             })
+
+
+def crear_csv_por_defecto(ruta_archivo):
+    directorio = os.path.dirname(ruta_archivo)
+    if directorio and not os.path.exists(directorio):
+        os.makedirs(directorio, exist_ok=True)
+
+    filas = [
+        ["frase", "pelicula"],
+        ["Hasta la vista, baby", "Terminator"],
+        ["Yo soy tu padre", "Star Wars"],
+        ["La vida es bella", "La vida es bella"],
+    ]
+
+    with open(ruta_archivo, "w", newline="", encoding="utf-8") as archivo:
+        escritor = csv.writer(archivo)
+        escritor.writerows(filas)
+
 
 def buscar_palabra(frases, palabra):
     palabra_normalizada = normalizar_texto(palabra)
@@ -138,9 +161,14 @@ def agregar_frase(frases, ruta_salida):
 
 def main():
     parser = argparse.ArgumentParser(description="Gestor de frases célebres por película.")
-    parser.add_argument("-i", "--input", required=True, help="Archivo CSV de entrada con frases y películas.")
-    parser.add_argument("-o", "--output", required=True, help="Archivo CSV de salida donde se guardarán los cambios.")
+    parser.add_argument("-i", "--input", default="frases_celebres.csv", help="Archivo CSV de entrada con frases y películas.")
+    parser.add_argument("-o", "--output", default="frases_corregidas.csv", help="Archivo CSV de salida donde se guardarán los cambios.")
     args = parser.parse_args()
+
+    if not os.path.exists(args.input):
+        print(f"No se encontró {args.input}. Se creará un archivo CSV de ejemplo automáticamente.")
+        crear_csv_por_defecto(args.input)
+
     frases = leer_csv(args.input)
     while True:
         mostrar_menu()
