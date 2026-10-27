@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<head> My movie Database    
+</head>
+
+<body> 
+    <h1>My Movie Database</h1>
+    <ul>
+        {% for movie in row %}
+        <li>({ movie.movie_title }) ({ movie.release_date })></li>
+        {% endfor %}
+    </ul>    
+</body>
