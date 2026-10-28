@@ -11,7 +11,7 @@ def index():
     conn = db.open_database(db_path)
     query = "SELECT * FROM movies;"
     rows = db.retrieve_data_with_query(conn, query)
-    return render_template('index.html', rows=rows)
+    return render_template('index.html', movies=rows)
 
 if __name__ == '__main__':
     app.run(debug=True) 
